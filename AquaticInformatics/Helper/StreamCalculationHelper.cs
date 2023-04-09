@@ -1,4 +1,4 @@
-﻿namespace RiverStream.Helper
+﻿namespace RiverFlow.Helper
 {
     public class StreamCalculationHelper
     {
@@ -41,12 +41,12 @@
                 double prevDepth = i == 0 ? 0 : stream.Sections[i - 1].Depth;
                 double nextDepth = i == stream.Sections.Count - 1 ? 0 : stream.Sections[i + 1].Depth;
 
-                //The depth correction is made because in reality, the depth of the stream can vary within a section,
+                //The depth correction is made because in reality the depth of the stream can vary within a section,
                 //with some parts of the section being deeper or shallower than others.
                 var correctedDepth = (prevDepth + stream.Sections[i].Depth + nextDepth) / 3;
 
                 //The velocity correction factor has been added to adjust for the fact that water velocity at the surface is faster than water
-                //velocity closer to the bottom of a stream.Use this factor to get a more accurate stream flow calculation.
+                //velocity closer to the bottom of a stream. Use this factor to get a more accurate stream flow calculation.
                 var correctedVelocity = stream.Sections[i].Velocity * velocityCorrectionFactor;
 
                 newSections.Add(new StreamSection() { Depth = correctedDepth, Velocity = correctedVelocity });

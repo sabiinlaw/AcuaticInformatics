@@ -1,7 +1,7 @@
-﻿using RiverStream.Helper;
-using Stream = RiverStream.Helper.Stream;
+﻿using RiverFlow.Helper;
+using Stream = RiverFlow.Helper.Stream;
 
-namespace RiverStream.Service
+namespace RiverFlow.Service
 {
     public interface IStreamService
     {

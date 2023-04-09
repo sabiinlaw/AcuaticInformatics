@@ -1,10 +1,10 @@
-using RiverStream.Service;
-using RiverStream.Helper;
+using RiverFlow.Service;
+using RiverFlow.Helper;
 using System.Collections.Generic;
 using Xunit;
 using System;
 
-namespace RiverStreamTests.ServiceTests
+namespace RiverFlowTests.ServiceTests
 {
     public class StreamServiceTest
     {
@@ -33,7 +33,7 @@ namespace RiverStreamTests.ServiceTests
         }
 
         [Fact]
-        public void TestCalculateVolumeWithCorrectionFactor()
+        public void TestCalculateVolume_WithCorrectionFactor()
         {
             var stream = new Stream
             {

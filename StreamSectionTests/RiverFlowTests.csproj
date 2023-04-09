@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AquaticInformatics\RiverStream.csproj" />
+    <ProjectReference Include="..\AquaticInformatics\RiverFlow.csproj" />
   </ItemGroup>
 
 </Project>

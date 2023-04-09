@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RiverStream.Helper;
-using RiverStream.Service;
-using Stream = RiverStream.Helper.Stream;
+using RiverFlow.Helper;
+using RiverFlow.Service;
+using Stream = RiverFlow.Helper.Stream;
 
 static double ReadDouble(string message)
 {
@@ -24,12 +24,12 @@ services.AddSingleton<IStreamService, StreamService>();
 var serviceProvider = services.BuildServiceProvider();
 var streamService = serviceProvider.GetService<IStreamService>();
 
-var width = ReadDouble($"Enter the stream width (in feet): ");
+var streamWidth = ReadDouble($"Enter the stream width (in feet): ");
 var sectionsQuantity = ReadDouble($"Enter the stream cross-section sections quantity: ");
 
 var stream = new Stream()
 {
-    Width = width,
+    Width = streamWidth,
     Sections = new List<StreamSection>()
 };
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace RiverStream.Helper
+namespace RiverFlow.Helper
 {
     public class Stream
     {
