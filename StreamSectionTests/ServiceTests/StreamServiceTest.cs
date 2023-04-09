@@ -3,11 +3,31 @@ using RiverFlow.Helper;
 using System.Collections.Generic;
 using Xunit;
 using System;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace RiverFlowTests.ServiceTests
 {
     public class StreamServiceTest
     {
+        private readonly IStreamService _streamService;
+
+        public StreamServiceTest()
+        {
+            var services = new ServiceCollection();
+
+            services.AddScoped<IStreamService, StreamService>();
+            services.AddLogging(logging =>
+            {
+                logging.AddFilter(nameof(StreamService), LogLevel.Information);
+            });
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var service = serviceProvider.GetRequiredService<IStreamService>();
+            _streamService = service;
+        }
+
         [Fact]
         public void TestCalculateVolume()
         {
@@ -27,7 +47,7 @@ namespace RiverFlowTests.ServiceTests
             };
 
             double expectedVolume = 112.00;
-            double actualVolume = Math.Round(new StreamService().CalculateVolume(stream, false), 2);
+            double actualVolume = Math.Round(_streamService.CalculateVolume(stream, false), 2);
             
             Assert.Equal(expectedVolume, actualVolume, 2);
         }
@@ -51,7 +71,7 @@ namespace RiverFlowTests.ServiceTests
             };
 
             double expectedVolume = 86.67;
-            double actualVolume = Math.Round(new StreamService().CalculateVolume(stream, true), 2);
+            double actualVolume = Math.Round(_streamService.CalculateVolume(stream, true), 2);
 
             Assert.Equal(expectedVolume, actualVolume, 2);
         }
@@ -66,7 +86,7 @@ namespace RiverFlowTests.ServiceTests
             };
 
             Assert.Throws<ArgumentException>(() => {
-                new StreamService().CalculateVolume(stream, false);
+                _streamService.CalculateVolume(stream, false);
             });
         }
 
@@ -89,7 +109,7 @@ namespace RiverFlowTests.ServiceTests
             };
 
             double expectedVolume = 0.00;
-            double actualVolume = Math.Round(new StreamService().CalculateVolume(stream, false), 2);
+            double actualVolume = Math.Round(_streamService.CalculateVolume(stream, false), 2);
 
             Assert.Equal(expectedVolume, actualVolume, 2);
         }
@@ -113,7 +133,7 @@ namespace RiverFlowTests.ServiceTests
             };
 
             double expectedVolume = 7e+18;
-            double actualVolume = new StreamService().CalculateVolume(stream, false);
+            double actualVolume = _streamService.CalculateVolume(stream, false);
 
             Assert.Equal(expectedVolume, actualVolume, 2);
         }
